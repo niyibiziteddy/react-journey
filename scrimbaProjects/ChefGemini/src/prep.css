@@ -1,0 +1,60 @@
+       
+        article {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fcfcf9;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        article h1 {
+            color: #c94a29;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        article .recipe-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.95rem;
+            color: #666;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        article .meta-item strong {
+            color: #333;
+        }
+        article h2 {
+            color: #444;
+            border-left: 4px solid #c94a29;
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+        article ul, ol {
+            padding-left: 20px;
+        }
+        article li {
+            margin-bottom: 10px;
+        }
+        article .ingred-list li {
+            list-style-type: square;
+        }
+        article .instructions-list li {
+            padding-left: 5px;
+        }
+        article .instructions-list li::marker {
+            font-weight: bold;
+            color: #c94a29;
+        }
+        article .note {
+            background-color: #fff8f5;
+            border-left: 4px solid #f4a261;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 0 8px 8px 0;
+        }
