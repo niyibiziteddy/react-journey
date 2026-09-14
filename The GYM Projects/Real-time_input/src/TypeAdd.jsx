@@ -3,7 +3,6 @@ export default function TypeAdd(){
     const [char,setChar] = useState('')
 
     function addChar(e){
-        console.log(e.currentTarget.value)
         setChar(e.currentTarget.value)
     }
     
