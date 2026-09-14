@@ -1,0 +1,51 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.container{
+  margin: 2rem auto 1rem auto;
+  background-image: linear-gradient(to right, rgb(202, 106, 106),rgb(68, 68, 218));
+  width: 40%;
+  height: 200px;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.display{
+  background-color: beige;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  border-radius: 1rem;
+}
+.buttons{
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+button{
+  width: 50%;
+  height: 3rem;
+  font-size: 3rem;
+  padding: 0;
+}
+#minus{
+  background-color: rgb(207, 97, 97);
+  border: 2px solid rgb(170, 4, 4);
+  border-radius: 1rem;
+}
+#minus:hover{
+  background-color: rgb(138, 59, 59);
+}
+#plus{
+  background-color: rgb(97, 97, 224);
+   border: 2px solid rgb(13, 38, 121);
+  border-radius: 1rem;
+  
+}
+#plus:hover{
+  background-color: rgb(17, 17, 223);
+}
