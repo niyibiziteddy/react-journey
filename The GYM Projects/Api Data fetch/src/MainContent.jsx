@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import FetchData from "./FetchingData";
-import Spiner from "./spiner";
+import Spiner from "./Spiner";
 export default function MainContent(){
     const [products,setProducts] = useState([])
     useEffect(()=>{
@@ -23,10 +23,10 @@ export default function MainContent(){
     })
     return(
         <>
-            <Spiner />
-            {/* <main className=" container products">  
-                {products}                
-            </main> */}
+            {products.length === 0 ? <Spiner /> : <main className=" container products">
+                {prodList}
+            </main>}
+            
         </>
     )
     

@@ -56,3 +56,28 @@ img{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1rem;
 }
+.spinner {
+  width: 200px; 
+  height: 130px;
+}
+.spiner-container{
+  width: 100%;
+  height: 500px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.spinner svg {
+  width: 100%; 
+  height: 100%;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
