@@ -1,0 +1,58 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  padding: 20px;
+}
+img{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.container{
+  padding: 20px;
+  width: 90%;
+  margin-inline: auto;
+}
+.header{
+  text-align: center;
+  background-color: rgb(197, 189, 179);
+}
+.prod-item .image img{
+  width: 100%;
+  height: 100%;
+}
+.prod-item .image{
+  width: 100%;
+  background-color: rgb(255, 250, 250);
+  height: 250px;
+  padding: 10px 0 10px 0;
+  border-radius: 7px;
+}
+.prod-item{
+  background-color: rgb(240, 235, 245);
+  padding: 20px;
+  border-radius: 7px;
+}
+.prod-item .category{
+  color: rgb(55, 58, 58);
+  margin-bottom: 1rem;
+}
+.prod-item .title{
+  color: rgb(74, 133, 74);
+  white-space: nowrap;
+  width: 180px;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+}
+.products{
+  background-color: rgb(253, 251, 248);
+  margin-top: 3rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}
