@@ -1,4 +1,4 @@
-export default function Calc_numberPad({displayer}){
+export default function Calc_numberPad({displayer, deleter}){
     return(
         <>
             <div className="number-pad">
@@ -13,7 +13,7 @@ export default function Calc_numberPad({displayer}){
                 <button className="numbers" onClick={() => displayer('3')}>3</button>
                 <button className="numbers" onClick={() => displayer('.')}>.</button>
                 <button className="numbers" onClick={() => displayer('0')}>0</button>
-                <button className="numbers">del</button>
+                <button className="numbers" onClick={deleter}>del</button>
             </div>
         </>
     )

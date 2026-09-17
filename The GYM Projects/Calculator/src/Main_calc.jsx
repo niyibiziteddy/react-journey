@@ -5,23 +5,28 @@ import Calc_operatorPad from "./calc_components/Calc_operatorPad"
 import { useState } from "react"
 
 export default function Main_calc(){
-    const[data,setData] = useState([]);
+    const[data,setData] = useState("");
+    let calcArray = data;
 
-    let calcArray = []
     function displayer(num){
-        calcArray.push(num)
-        console.log(calcArray)
+        calcArray+=num
+        console.log("ready to use setData")
         setData(calcArray)
+    };
 
+    function deleter(){
+        let temp = data;
+        console.log(temp);
+        
     }
-    const readyData = data;
+    console.log("These are data",data)
     return(
         <>
             <div className="container">
-                <Calc_screen />
+                <Calc_screen data = {data}/>
                 <Calc_funcpad />
                 <div className="lower-part">
-                    <Calc_numberPad displayer={displayer}/>
+                    <Calc_numberPad displayer={displayer} deleter={deleter}/>
                     <Calc_operatorPad displayer={displayer}/>
                 </div>
             </div>
