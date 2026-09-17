@@ -16,11 +16,20 @@
   background-color: beige;
   margin-bottom: 10px;
 }
+
 .func-pad{
+  padding: 0.5rem;
   height: 80px;
   width: 100%;
   background-color: aquamarine;
   margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100px;
+  gap: 10px;
+}
+.functions{
+  background-color: green;
 }
 .lower-part{
   height: 300px;
@@ -31,7 +40,31 @@
 }
 .number-pad{
   background-color: brown;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.8rem;
 }
 .operator-pad{
   background-color: chartreuse;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 0.8rem;
+}
+.operators{
+  border-radius: 25%;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.numbers{
+  background-color: grey;
+  border-radius: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
 }

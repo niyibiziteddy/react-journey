@@ -1,19 +1,19 @@
-export default function Calc_numberPad(){
+export default function Calc_numberPad({displayer}){
     return(
         <>
             <div className="number-pad">
-                <div className="numbers">7</div>
-                <div className="numbers">8</div>
-                <div className="numbers">9</div>
-                <div className="numbers">4</div>
-                <div className="numbers">5</div>
-                <div className="numbers">6</div>
-                <div className="numbers">1</div>
-                <div className="numbers">2</div>
-                <div className="numbers">3</div>
-                <div className="numbers">0</div>
-                <div className="numbers">.</div>
-                <div className="numbers">del</div>
+                <button className="numbers" onClick={() => displayer('7')}>7</button>
+                <button className="numbers" onClick={() => displayer('8')}>8</button>
+                <button className="numbers" onClick={() => displayer('9')}>9</button>
+                <button className="numbers" onClick={() => displayer('4')}>4</button>
+                <button className="numbers" onClick={() => displayer('5')}>5</button>
+                <button className="numbers" onClick={() => displayer('6')}>6</button>
+                <button className="numbers" onClick={() => displayer('1')}>1</button>
+                <button className="numbers" onClick={() => displayer('2')}>2</button>
+                <button className="numbers" onClick={() => displayer('3')}>3</button>
+                <button className="numbers" onClick={() => displayer('.')}>.</button>
+                <button className="numbers" onClick={() => displayer('0')}>0</button>
+                <button className="numbers">del</button>
             </div>
         </>
     )
