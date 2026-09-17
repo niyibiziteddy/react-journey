@@ -3,27 +3,34 @@ import Calc_funcpad from "./calc_components/Calc_funcPad"
 import Calc_numberPad from "./calc_components/Calc_numberPad"
 import Calc_operatorPad from "./calc_components/Calc_operatorPad"
 import { useState } from "react"
+import Header from "./Header"
+
 
 export default function Main_calc(){
     const[data,setData] = useState("");
-    let calcArray = data;
+    const[turnedOn,setTurnedOn] = useState(false)
+    function turner(){
+        setTurnedOn(!turnedOn)
+        setData([])
+    }
+    let calcArray = data;    
 
     function displayer(num){
-
-        calcArray+=num
+        if(Object.is(Number(num),NaN) && num !== '.') calcArray+=` ${num} `
+        else calcArray+=num
         setData(calcArray)
     };
 
     function deleter(){
         let temp = data;
-        setData(temp.slice(0,-1));
+        if(temp.length >=2) setData(temp.slice(0,-1));
         
     }
 
     function calculate(){
         let temp = data;
-        let allCalc = temp.split('')
-        console.log( typeof Number('+') === 'number')
+        let allCalc = temp.split(' ')
+        console.log(allCalc)
         //Taking all the operators at once
         let operators = allCalc.filter(el => (['/','-','+','x'].includes(el)))
         //Aranging the operators to make sure the are aranged according to bodmas
@@ -52,9 +59,12 @@ export default function Main_calc(){
             allCalc[allCalc.indexOf("")] = c;
             console.log(allCalc)
         }
-        //setData(allCalc[0]);
+        setData(allCalc[0]);
 
 
+    }
+    function clearFunc(){
+        setData([])
     }
     function bodmas(op){
         if(op.includes('/') && !op.includes('x')){
@@ -87,8 +97,9 @@ export default function Main_calc(){
     return(
         <>
             <div className="container">
-                <Calc_screen data = {data}/>
-                <Calc_funcpad />
+                <Header />
+                {turnedOn ?<Calc_screen data = {data}/> : <div className="turned-off"></div> }
+                <Calc_funcpad clearFunc ={clearFunc} turner = {turner}/>
                 <div className="lower-part">
                     <Calc_numberPad displayer={displayer} deleter={deleter}/>
                     <Calc_operatorPad displayer={displayer} calculate = {calculate}/>

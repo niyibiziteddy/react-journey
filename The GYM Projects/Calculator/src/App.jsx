@@ -1,9 +1,8 @@
 import Main_calc from "./Main_calc"
-
+import Header from "./Header"
 export default function App(){
   return(
     <>
-      <h1>This is the heading</h1>
       <Main_calc />
     </>
   )
