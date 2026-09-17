@@ -9,17 +9,43 @@ export default function Main_calc(){
     let calcArray = data;
 
     function displayer(num){
+
         calcArray+=num
-        console.log("ready to use setData")
         setData(calcArray)
     };
 
     function deleter(){
         let temp = data;
-        console.log(temp);
+        setData(temp.slice(0,-1));
         
     }
-    console.log("These are data",data)
+
+    function calculate(){
+        let temp = data;
+        let allCalc = temp.split('')
+        let operators = allCalc.filter(el => (['/','-','+','x'].includes(el)))
+        console.log(bodmas(operators))
+        
+
+
+    }
+    function bodmas(op){
+        if(op.includes('/')){
+            let ind = op.indexOf('/');
+            console.log(op,ind)
+            let slash_len = op.filter(e => e !== "/").length
+            let newOp = op.filter(e => e !== "/")
+            let slashes = "/".repeat(slash_len);
+            slashes = slashes.split('')
+            return [...slashes,...newOp];
+        }
+        else if(op.includes('x')){
+            let ind = op.indexOf('/');
+            console.log(op,ind)
+            op.splice(ind,1);
+            return ['/',...op];
+        }
+    }
     return(
         <>
             <div className="container">
@@ -27,7 +53,7 @@ export default function Main_calc(){
                 <Calc_funcpad />
                 <div className="lower-part">
                     <Calc_numberPad displayer={displayer} deleter={deleter}/>
-                    <Calc_operatorPad displayer={displayer}/>
+                    <Calc_operatorPad displayer={displayer} calculate = {calculate}/>
                 </div>
             </div>
         </>
