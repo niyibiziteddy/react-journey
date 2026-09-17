@@ -5,7 +5,7 @@ export default function Calc_funcPad(props){
                 <button className="functions"></button>
                 <button className="functions"></button>
                 <button className="functions"></button>
-                <button className="functions" onClick={props.turner}>on/off</button>
+                <button id="on-off" className="functions"  onClick={props.turner}>on/off</button>
                 <button className="functions"></button>
                 <button className="functions"></button>
                 <button className="functions"></button>

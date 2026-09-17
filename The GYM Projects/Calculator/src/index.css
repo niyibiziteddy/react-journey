@@ -10,9 +10,16 @@
   width: 30%;
   min-width: 300px;
   border-radius: 1rem;
-  background-color: rgb(167, 160, 151);
+  background-color: rgb(94, 92, 90);
+}
+#on-off{
+  background-color: rgb(219, 72, 72);
+}
+#on-off:hover{
+  background-color: rgb(216, 23, 23);
 }
 .header{
+  color: rgb(182, 175, 175);
   margin-bottom: 1rem;
 }
 #fx{
@@ -47,10 +54,15 @@
   height: 100px;
   gap: 10px;
 }
+.functions:hover,.operators:hover,.numbers:hover{
+  background-color: rgb(99, 92, 92);
+}
 .functions{
   background-color: rgb(49, 51, 49);
   height: 22px;
   color: white;
+  border: none;
+  border-radius: 6px;
 }
 .lower-part{
   height: 300px;
