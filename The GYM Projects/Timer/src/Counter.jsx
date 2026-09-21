@@ -1,19 +1,24 @@
 import Screen from "./Screen"
-import { useEffect,useState,useRef } from "react"
+import { useEffect,useState,useRef,createContext } from "react"
 import Buttons from "./Buttons"
+export const InputContext = createContext();
 export default function Counter(){
-
     const [sec,setSec] = useState(5);
     const [min,setMin] = useState(1);
     const [hour,setHour] = useState(0);
     const [start,setStart] = useState(false);
     let intervalId = useRef(null)
-    
+
     let yesStart = false
+
+    function initializer(hour,min,sec){
+        setMin(min)
+        setSec(sec)
+        setHour(hour)
+    }
+
     function reset(){
-        setMin(0)
-        setSec(0)
-        setHour(0)
+        
     }
     if(min === 0 && hour !==0){
         setHour(hour-1)
@@ -47,11 +52,13 @@ export default function Counter(){
     },[start])
 
     return (
-        <>
-            <div className="container">
-                <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`}/>
-                <Buttons handleStart={() => setStart(!start)} yesStart={yesStart} state={start} reset ={reset}/>
-            </div>
+        <>  
+            <InputContext value={() => initializer(hour,min,sec)}>
+                <div className="container">
+                    <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`}/>
+                    <Buttons handleStart={() => setStart(!start)} yesStart={yesStart} state={start} reset ={reset}/>
+                </div>
+            </InputContext>
         </>
     )
 }

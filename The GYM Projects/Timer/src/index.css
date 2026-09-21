@@ -27,6 +27,9 @@ body{
 .buttons-item{
   width: 100%;
 }
+.screen.input input{
+  width: 10%;
+}
 .screen{
   display: flex;
   justify-content: center;
