@@ -4,19 +4,30 @@ import Buttons from "./Buttons"
 export const InputContext = createContext();
 import ActualScreen from "./ActualScreen";
 export default function Counter(){
-    const [sec,setSec] = useState();
-    const [min,setMin] = useState();
-    const [hour,setHour] = useState();
+    const [sec,setSec] = useState(0);
+    const [min,setMin] = useState(0);
+    const [hour,setHour] = useState(0);
     const [start,setStart] = useState(false);
     const [isEditing,setIsEditing] = useState(false)
     let intervalId = useRef(null)
     let yesStart = false
-    console.log("rendered")
-
+    console.log(hour,min,sec)
+    let initialSec;
+    let initialmin;
+    let initialHour
     function reset(){
-        setHour(0)
-        setMin(0)
-        setSec(0)
+        setHour(initialHour)
+        setMin(initialmin)
+        setSec(initialSec)
+    }
+    function handleStart(){
+        console.log('Starting timer...')
+        setStart(!start)
+        setIsEditing(false)
+        initialSec = sec;
+        initialmin = min;
+        initialHour = hour;
+        console.log(initialHour,initialSec)
     }
     function isEditFunc(){
         setIsEditing(true)
@@ -37,7 +48,6 @@ export default function Counter(){
 
     useEffect(() => {
         if(hour !== 0 || min !== 0 || sec !== 0){
-            console.log('Starting timer...')
             if(start){
             intervalId.current = setInterval(() => {
             setSec((prev) => {
@@ -57,10 +67,9 @@ export default function Counter(){
         <>  
             <InputContext value={() => initializer(hour,min,sec)}>
                 <div className="container">
-                    <ActualScreen sec={`${sec}`} min={`${min}`} hour={`${hour}`} setHour={setHour} setSec={setSec} setMin={setMin}/>
-                    {/* <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc}/> */}
-                    <Buttons editState={isEditing} handleStart={() => setStart(!start)} yesStart={yesStart} state={start} reset ={reset}/>
-                    <button>Options</button>
+                    {isEditing ? <ActualScreen sec={`${sec}`} min={`${min}`} hour={`${hour}`} setHour={setHour} setSec={setSec} setMin={setMin}/> :
+                    <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc}/>}
+                    <Buttons editState={isEditing} handleStart={handleStart} yesStart={yesStart} state={start} reset ={reset}/>
                 </div>
             </InputContext>
         </>
