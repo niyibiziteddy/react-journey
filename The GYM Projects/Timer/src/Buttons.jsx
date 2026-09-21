@@ -1,4 +1,6 @@
-export default function Buttons({handleStart,state,reset,yesStart}){
+
+
+export default function Buttons({handleStart,state,reset,yesStart,isEditing}){
     return(
         <>
             <div className="buttons">
