@@ -9,12 +9,13 @@ export default function Counter(){
     const [hour,setHour] = useState(0);
     const [start,setStart] = useState(false);
     const [isEditing,setIsEditing] = useState(false)
+    let count = useRef(0)
     let intervalId = useRef(null)
     let yesStart = false
     console.log(hour,min,sec)
-    let initialSec;
-    let initialmin;
-    let initialHour
+    const [initialSec,setInitialSec] = useState();
+    const [initialmin,setInitialMin] = useState();
+    const [initialHour,setInitialHour] = useState();
     function reset(){
         setHour(initialHour)
         setMin(initialmin)
@@ -24,13 +25,17 @@ export default function Counter(){
         console.log('Starting timer...')
         setStart(!start)
         setIsEditing(false)
-        initialSec = sec;
-        initialmin = min;
-        initialHour = hour;
+        if(count.current === 1){
+            setInitialSec(sec)
+            setInitialMin(min);
+            setInitialHour(hour);
+        }
+        count.current++
         console.log(initialHour,initialSec)
     }
     function isEditFunc(){
         setIsEditing(true)
+        count.current = 1
         console.log("you can edit now")
     }
     if(min === 0 && hour !==0){
@@ -68,7 +73,7 @@ export default function Counter(){
             <InputContext value={() => initializer(hour,min,sec)}>
                 <div className="container">
                     {isEditing ? <ActualScreen sec={`${sec}`} min={`${min}`} hour={`${hour}`} setHour={setHour} setSec={setSec} setMin={setMin}/> :
-                    <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc}/>}
+                    <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc} state={start}/>}
                     <Buttons editState={isEditing} handleStart={handleStart} yesStart={yesStart} state={start} reset ={reset}/>
                 </div>
             </InputContext>

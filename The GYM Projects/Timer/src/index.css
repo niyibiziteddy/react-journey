@@ -43,3 +43,7 @@ body{
   height: 40px;
   background-color: bisque;
 }
+.screen.no-click{
+  pointer-events: none;
+  cursor: not-allowed;
+}
