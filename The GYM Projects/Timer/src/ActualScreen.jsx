@@ -1,6 +1,6 @@
 import InputContext from "./Counter.jsx"
 export default function ActualScreen({setMin,setSec,setHour,sec,min,hour}){
-
+    console.log(hour)
     return(
         <>
             <div className="screen input">
