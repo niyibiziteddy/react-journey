@@ -20,7 +20,7 @@ export default function Counter(){
         setStart(!start)
         setIsEditing(false)
         if(count.current === 1){
-            setInitObj({initSec:sec,initMIn:min,initHour:hour})
+            setInitObj({initSec:sec,initMin:min,initHour:hour})
         }
         count.current++
     }
@@ -33,20 +33,24 @@ export default function Counter(){
         setRealTimeObj(prevReal => ({...prevReal,hour:hour-1,min:59}))
     }
     else if(sec === 0 && min !== 0 && !isEditing){
+        console.log("Ran here where sec == 0 and min != 0")
         setRealTimeObj(prevReal => ({...prevReal,min:min-1,sec:59}))
     }
     else if((hour === 0 && min === 0 && sec === 0) && start && !isEditing){
+        console.log("Equal to zeros, clearing interval")
         clearInterval(intervalId.current)
         yesStart = true
     }
-
     useEffect(() => {
         if(hour !== 0 || min !== 0 || sec !== 0){
             if(start){
             intervalId.current = setInterval(() => {
-                setRealTimeObj(prevReal => ({...prevReal,sec:sec-1}))
+                setRealTimeObj(prevReal => ({...prevReal,sec:{...prevReal}.sec - 1}))
             },1000)
-            return () => clearInterval(intervalId.current)
+            return () => {
+                clearInterval(intervalId.current)
+                console.log("interval cleared...")
+                }
             }
         }
         else if((hour === 0 && min === 0 && sec === 0) && start){
