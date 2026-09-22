@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    padding: 1rem;
+}
+.container{
+    width: 50%;
+    background-color: #00ffff;
+    height: 500px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.addTask{
+    width: 80%;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    
+}
+.addTask input{
+    width: 80%;
+    height: 30px;
+}
+.addTask button{
+    width: 20%;
+}
+.task-container{
+    background-color: bisque;
+    width: 100%;
+    padding: 0.5rem;
+}
+.task-item{
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+.task-item p{
+    margin-right: auto;
+}
