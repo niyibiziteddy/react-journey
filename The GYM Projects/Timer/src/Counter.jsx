@@ -1,52 +1,41 @@
 import Screen from "./Screen"
-import { useEffect,useState,useRef,createContext } from "react"
+import { useEffect,useState,useRef } from "react"
 import Buttons from "./Buttons"
-export const InputContext = createContext();
 import ActualScreen from "./ActualScreen";
 export default function Counter(){
-    const [sec,setSec] = useState(0);
-    const [min,setMin] = useState(0);
-    const [hour,setHour] = useState(0);
+    const [realTimeObj,setRealTimeObj] = useState({sec:0,min:0,hour:0})
+    const {min,sec,hour} = realTimeObj
     const [start,setStart] = useState(false);
     const [isEditing,setIsEditing] = useState(false)
+    const [initObj,setInitObj] = useState({initSec:null,initMin:null,initHour:null});
+    const {initSec,initMin,initHour} = initObj;
     let count = useRef(0)
     let intervalId = useRef(null)
     let yesStart = false
-    console.log(hour,min,sec)
-    const [initialSec,setInitialSec] = useState();
-    const [initialmin,setInitialMin] = useState();
-    const [initialHour,setInitialHour] = useState();
     function reset(){
-        setHour(initialHour)
-        setMin(initialmin)
-        setSec(initialSec)
+        setRealTimeObj(prevTime => ({hour:initHour,min:initMin,sec:initSec}))
     }
     function handleStart(){
         console.log('Starting timer...')
         setStart(!start)
         setIsEditing(false)
         if(count.current === 1){
-            setInitialSec(sec)
-            setInitialMin(min);
-            setInitialHour(hour);
+            setInitObj({initSec:sec,initMIn:min,initHour:hour})
         }
         count.current++
-        console.log(initialHour,initialSec)
     }
     function isEditFunc(){
         setIsEditing(true)
         count.current = 1
         console.log("you can edit now")
     }
-    if(min === 0 && hour !==0){
-        setHour(hour-1)
-        setMin(1)
+    if(min === 0 && hour !==0 && !isEditing){
+        setRealTimeObj(prevReal => ({...prevReal,hour:hour-1,min:59}))
     }
-    else if(sec === 0 && min !== 0){
-        setMin(min-1)
-        setSec(10)
+    else if(sec === 0 && min !== 0 && !isEditing){
+        setRealTimeObj(prevReal => ({...prevReal,min:min-1,sec:59}))
     }
-    else if((hour === 0 && min === 0 && sec === 0) && start){
+    else if((hour === 0 && min === 0 && sec === 0) && start && !isEditing){
         clearInterval(intervalId.current)
         yesStart = true
     }
@@ -55,9 +44,7 @@ export default function Counter(){
         if(hour !== 0 || min !== 0 || sec !== 0){
             if(start){
             intervalId.current = setInterval(() => {
-            setSec((prev) => {
-                return prev - 1
-            })
+                setRealTimeObj(prevReal => ({...prevReal,sec:sec-1}))
             },1000)
             return () => clearInterval(intervalId.current)
             }
@@ -70,13 +57,11 @@ export default function Counter(){
 
     return (
         <>  
-            <InputContext value={() => initializer(hour,min,sec)}>
-                <div className="container">
-                    {isEditing ? <ActualScreen sec={`${sec}`} min={`${min}`} hour={`${hour}`} setHour={setHour} setSec={setSec} setMin={setMin}/> :
-                    <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc} state={start}/>}
-                    <Buttons editState={isEditing} handleStart={handleStart} yesStart={yesStart} state={start} reset ={reset}/>
-                </div>
-            </InputContext>
+            <div className="container">
+                {isEditing ? <ActualScreen sec={`${sec}`} min={`${min}`} hour={`${hour}`} setRealTimeObj={setRealTimeObj}/> :
+                <Screen sec={`${sec}`} min={`${min}`} hour={`${hour}`} isEditing={isEditFunc} state={start}/>}
+                <Buttons editState={isEditing} handleStart={handleStart} yesStart={yesStart} state={start} reset ={reset}/>
+            </div>
         </>
     )
 }
