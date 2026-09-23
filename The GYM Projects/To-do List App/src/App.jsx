@@ -8,19 +8,23 @@ export default function App(){
     // const [taskObj,settaskObj] =  useState(["Sleeping","Waking up"])
     const [isEditing,setIsEditing] = useState(false)
 
-    const [taskObj,dispatcher] = useReducer(reducer,[{id:crypto.randomUUID(),task:"sleeping",finished:false}])
+    const [taskObj,dispatcher] = useReducer(reducer,[{id:crypto.randomUUID(),task:"sleeping",finished:false,editing:false}])
     function deleter(key){
         dispatcher({type:"delete_item",id:key})
     }   
     function getTasks(formData){
         let data = formData.get("task")
-        dispatcher({type:"add_task",task:data})
+        if(data !== ''){
+            dispatcher({type:"add_task",task:data})
+        }
         //settaskObj(prevArray => ([...prevArray,data]))
     } 
-    function editTasks(formData,key){
-        let data = formData.get("edit-task")
+    function editTasks(key,formData){
+        let data = formData.get("edit-task");
         dispatcher({type:"edit-task",change:data,id:key})
-        setIsEditing(false)
+    }
+    function enableEdit(key){
+        dispatcher({type:"enable_edit",id:key})
     }
     function checker(key,checked){
         console.log("runned checker")
@@ -31,7 +35,7 @@ export default function App(){
             <div className="container">
                 <Form onGetTasks={getTasks} />
                 <br />
-                <TaskList isEditing={isEditing} onSave={editTasks} onEdit={() => setIsEditing(true)}  onChecker={checker} onDelete={deleter} taskObj={taskObj}/>
+                <TaskList onSave={editTasks} onEdit={enableEdit}  onChecker={checker} onDelete={deleter} taskObj={taskObj}/>
             </div>
         </>
     )
@@ -51,7 +55,22 @@ function reducer(state,action){
                 }
                 else return item
             })
-            break;
+        case("edit-task"):
+            return [...state].map(item => {
+                if(item.id === action.id){
+                    return {...item,task:action.change,editing:false}
+                }
+                else return item
+            })
+        case("enable_edit"):
+            console.log("changed to true")
+            return [...state].map(item => {
+                if(item.id === action.id){
+                    
+                    return {...item,editing:true}
+                }
+                else return item
+            })
         default:
             console.log("unknown action")
             break;
