@@ -47,3 +47,6 @@ body{
 .task-item p{
     margin-right: auto;
 }
+.mark-finished p{
+    text-decoration: line-through;
+}

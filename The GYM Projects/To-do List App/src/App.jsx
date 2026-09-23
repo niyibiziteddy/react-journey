@@ -17,6 +17,7 @@ export default function App(){
         //settaskObj(prevArray => ([...prevArray,data]))
     } 
     function checker(key,checked){
+        console.log("runned checker")
         dispatcher({type:"mark_checked",id:key,checked})
     } 
     return(
@@ -36,9 +37,14 @@ function reducer(state,action){
             return ([...state,{id:crypto.randomUUID(),task:action.task}])
         case("delete_item"):
             return [...state].filter(item => item.id !== action.id)
-        case("Mark_checked"):
+        case("mark_checked"):
             console.log("checked: ",action.checked)
-            return state
+            return [...state].map(item => {
+                if(item.id === action.id){
+                    return {...item,finished: action.checked}
+                }
+                else return item
+            })
             break;
         default:
             console.log("unknown action")
