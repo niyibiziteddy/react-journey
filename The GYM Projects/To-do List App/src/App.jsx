@@ -6,6 +6,7 @@ import TaskList from "./TaskList"
 export default function App(){
 
     // const [taskObj,settaskObj] =  useState(["Sleeping","Waking up"])
+    const [isEditing,setIsEditing] = useState(false)
 
     const [taskObj,dispatcher] = useReducer(reducer,[{id:crypto.randomUUID(),task:"sleeping",finished:false}])
     function deleter(key){
@@ -16,6 +17,11 @@ export default function App(){
         dispatcher({type:"add_task",task:data})
         //settaskObj(prevArray => ([...prevArray,data]))
     } 
+    function editTasks(formData,key){
+        let data = formData.get("edit-task")
+        dispatcher({type:"edit-task",change:data,id:key})
+        setIsEditing(false)
+    }
     function checker(key,checked){
         console.log("runned checker")
         dispatcher({type:"mark_checked",id:key,checked})
@@ -25,7 +31,7 @@ export default function App(){
             <div className="container">
                 <Form onGetTasks={getTasks} />
                 <br />
-                <TaskList onChecker={checker} onDelete={deleter} taskObj={taskObj}/>
+                <TaskList isEditing={isEditing} onSave={editTasks} onEdit={() => setIsEditing(true)}  onChecker={checker} onDelete={deleter} taskObj={taskObj}/>
             </div>
         </>
     )

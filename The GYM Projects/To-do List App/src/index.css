@@ -44,6 +44,14 @@ body{
     background-color: blueviolet;
     padding: 0.6rem;
 }
+form.task-item input{
+    margin-right: auto;
+    width: 80%;
+}
+form.task-item button{
+    width: 20%;
+    height: 30px;
+}
 .task-item p{
     margin-right: auto;
 }
