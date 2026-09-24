@@ -24,7 +24,7 @@ export default function App(){
         dispatcher({type:"edit-task",change:data,id:key})
     }
     function enableEdit(key){
-        dispatcher({type:"enable_edit",id:key})
+        dispatcher({type:"enable_edit",id:key,finished:false})
     }
     function checker(key,checked){
         console.log("runned checker")
@@ -58,7 +58,7 @@ function reducer(state,action){
         case("edit-task"):
             return [...state].map(item => {
                 if(item.id === action.id){
-                    return {...item,task:action.change,editing:false}
+                    return {...item,task:action.change,editing:false,finished:action.finished}
                 }
                 else return item
             })
