@@ -8,7 +8,7 @@ export default function App(){
     // const [taskObj,settaskObj] =  useState(["Sleeping","Waking up"])
     const [isEditing,setIsEditing] = useState(false)
 
-    const [taskObj,dispatcher] = useReducer(reducer,[{id:crypto.randomUUID(),task:"sleeping",finished:false,editing:false}])
+    const [taskObj,dispatcher] = useReducer(reducer,[])
     function deleter(key){
         dispatcher({type:"delete_item",id:key})
     }   
